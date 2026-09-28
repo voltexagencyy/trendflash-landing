@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0B0B0B">
+<title>Сайт за вечір — Trendflash</title>
+<meta name="description" content="Покроковий гайд: як зробити лендинг з AI за вечір і продати його місцевому бізнесу.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0B0B; --bg2:#121212; --line:rgba(255,255,255,.09); --text:#F4F4F0; --muted:#8C8C88;
+  --acc:#C6FF3D; --acc-ink:#0B0B0B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto}
+body{background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;font-size:17px;line-height:1.55;overflow-x:hidden;padding-bottom:84px}
+a{color:inherit}
+.display{font-family:Unbounded,system-ui,sans-serif;letter-spacing:-.03em;line-height:.95;font-weight:900;text-transform:uppercase}
+.wrap{width:100%;max-width:1280px;margin:0 auto;padding:0 max(20px,env(safe-area-inset-left))}
+.muted{color:var(--muted)}
+.acc{color:var(--acc)}
+/* grain */
+body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}50%{transform:translate(-3%,2%)}100%{transform:translate(2%,-3%)}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;mix-blend-mode:difference}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center;height:72px}
+.logo{font-family:Unbounded,system-ui,sans-serif;font-weight:800;font-size:18px;letter-spacing:-.02em}
+.nav a.link{font-size:14px;text-decoration:none;opacity:.9}
+
+/* hero */
+.hero{position:relative;height:100svh;min-height:640px;display:flex;align-items:flex-end;overflow:hidden}
+#gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-fallback{position:absolute;inset:0;background:radial-gradient(60% 60% at 70% 30%,#2b3a0c 0%,transparent 60%),radial-gradient(50% 50% at 20% 80%,#1d1d1d 0%,transparent 70%),var(--bg)}
+.hero .wrap{position:relative;z-index:2;padding-bottom:9vh}
+.eyebrow{display:inline-flex;gap:10px;align-items:center;font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:22px}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 16px var(--acc);display:inline-block}
+.hero h1{font-size:clamp(44px,10.5vw,168px)}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line span{display:inline-block;will-change:transform}
+.hero-bottom{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-end;margin-top:36px}
+.hero-bottom p{max-width:460px;color:#cfcfca;font-size:18px}
+.scroll-hint{position:absolute;right:20px;bottom:24px;z-index:2;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+/* buttons */
+.btn{--h:62px;position:relative;display:inline-flex;align-items:center;gap:14px;height:var(--h);padding:0 30px;border-radius:999px;background:var(--acc);color:var(--acc-ink);
+  font-family:Unbounded,system-ui,sans-serif;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.02em;text-decoration:none;overflow:hidden;will-change:transform}
+.btn .arr{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--acc-ink);color:var(--acc);font-size:14px;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.btn:hover .arr{transform:rotate(-45deg)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+
+/* marquee */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:22px 0;background:var(--bg)}
+.marquee .track{display:flex;gap:48px;white-space:nowrap;width:max-content;animation:mq 28s linear infinite}
+.marquee span{font-family:Unbounded,system-ui,sans-serif;font-weight:800;font-size:clamp(28px,5vw,64px);text-transform:uppercase;letter-spacing:-.02em}
+.marquee span.o{color:transparent;-webkit-text-stroke:1.5px var(--text)}
+.marquee span.a{color:var(--acc)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* sections */
+section.sec{padding:clamp(64px,9vw,140px) 0;position:relative}
+.label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:28px;display:flex;gap:12px;align-items:center}
+.label::before{content:"";width:28px;height:1px;background:var(--muted)}
+.big{font-size:clamp(34px,6.2vw,96px)}
+.reveal-words .w{display:inline-block;opacity:.12;transition:none}
+
+/* manifesto */
+.manifesto p{font-family:Unbounded,system-ui,sans-serif;font-weight:600;font-size:clamp(24px,3.6vw,52px);line-height:1.15;letter-spacing:-.02em;max-width:1100px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden;margin-top:clamp(40px,6vw,80px)}
+.stat{background:var(--bg);padding:36px 28px}
+.stat b{display:block;font-family:Unbounded,system-ui,sans-serif;font-weight:900;font-size:clamp(40px,6vw,88px);letter-spacing:-.04em;line-height:1}
+.stat span{color:var(--muted);font-size:15px}
+@media(max-width:760px){.stats{grid-template-columns:1fr}.mod{width:100%;height:auto}.mod .n{font-size:84px;margin-bottom:24px}}
+
+/* horizontal modules */
+.hwrap{position:relative;overflow:hidden}
+.hhead{padding-top:clamp(56px,8vw,120px)}
+.htrack{display:flex;gap:24px;padding:clamp(32px,4vw,60px) 20px clamp(56px,8vw,120px);width:max-content}
+.mod{position:relative;width:min(78vw,460px);height:min(62vh,560px);min-height:360px;border-radius:28px;background:linear-gradient(160deg,#161616,#0e0e0e);border:1px solid var(--line);padding:32px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.mod .n{font-family:Unbounded,system-ui,sans-serif;font-weight:900;font-size:120px;line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.18)}
+.mod h3{font-family:Unbounded,system-ui,sans-serif;font-weight:800;font-size:28px;letter-spacing:-.02em;line-height:1.05;margin-bottom:12px;text-transform:uppercase}
+.mod p{color:var(--muted)}
+.mod .glow{position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(198,255,61,.22),transparent 65%);right:-120px;top:-120px;pointer-events:none}
+.mod.accent{background:var(--acc);color:var(--acc-ink)}
+.mod.accent p{color:#26330a}.mod.accent .n{-webkit-text-stroke:1.5px rgba(0,0,0,.35)}
+
+/* terminal/browser demo */
+.demo{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center}
+@media(max-width:900px){.demo{grid-template-columns:1fr}}
+.term{background:#0f0f0f;border:1px solid var(--line);border-radius:20px;overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px}
+.term .bar{display:flex;gap:8px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.term .bar i{width:11px;height:11px;border-radius:50%;background:#2a2a2a}
+.term .body{padding:22px;min-height:220px;color:#d6d6d0;white-space:pre-wrap}
+.term .body .p{color:var(--acc)}
+.caret{display:inline-block;width:8px;height:16px;background:var(--acc);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.browser{border-radius:20px;border:1px solid var(--line);overflow:hidden;background:#fafaf7;color:#111;transform-origin:center;box-shadow:0 60px 120px -40px rgba(198,255,61,.25)}
+.browser .bar{display:flex;gap:8px;align-items:center;padding:12px 14px;background:#ececE6}
+.browser .bar i{width:10px;height:10px;border-radius:50%;background:#cfcfc8}
+.browser .url{margin-left:10px;font-size:12px;color:#777;background:#fff;border-radius:6px;padding:4px 10px;flex:1}
+.site{padding:28px}
+.site .sk{height:14px;border-radius:6px;background:#e6e6df;margin-bottom:10px}
+.site h4{font-family:Unbounded,system-ui,sans-serif;font-size:26px;line-height:1;margin-bottom:14px;text-transform:uppercase}
+.site .row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.site .row div{height:90px;border-radius:12px;background:#e6e6df}
+.site .cta{display:inline-block;margin-top:14px;background:#111;color:#fff;border-radius:999px;padding:10px 18px;font-size:13px;font-weight:700}
+.site .piece{opacity:0;transform:translateY(16px)}
+
+/* case */
+.case{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+@media(max-width:900px){.case{grid-template-columns:1fr}}
+.steps{list-style:none;counter-reset:s;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.steps li{counter-increment:s;background:var(--bg);padding:22px 24px;display:grid;grid-template-columns:48px 1fr;gap:4px 12px}
+.steps li::before{content:"0" counter(s);grid-row:span 2;font-family:Unbounded,system-ui,sans-serif;font-weight:800;color:var(--acc)}
+.steps b{font-family:Unbounded,system-ui,sans-serif;font-size:16px;text-transform:uppercase}
+.steps span{color:var(--muted)}
+.money{font-family:Unbounded,system-ui,sans-serif;font-weight:900;font-size:clamp(90px,16vw,240px);line-height:.85;letter-spacing:-.05em;color:var(--acc)}
+
+/* fit */
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:760px){.fit{grid-template-columns:1fr}}
+.fit .c{border:1px solid var(--line);border-radius:24px;padding:32px}
+.fit h3{font-family:Unbounded,system-ui,sans-serif;font-size:20px;text-transform:uppercase;margin-bottom:18px}
+.fit li{list-style:none;padding:12px 0;border-top:1px solid var(--line);color:#d0d0cb}
+.fit li::before{content:"+";color:var(--acc);font-weight:700;margin-right:12px}
+.fit .no li::before{content:"−";color:#ff5a4e}
+
+/* pricing */
+.price-card{position:relative;border-radius:32px;padding:56px 40px;background:var(--acc);color:var(--acc-ink);overflow:hidden}
+.price-card .display{font-size:clamp(40px,8vw,120px)}
+.price-card .row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;margin-top:40px}
+.price-card ul{list-style:none;display:grid;gap:8px;font-weight:600}
+.price-card ul li::before{content:"✓  "}
+.price-card .btn{background:var(--acc-ink);color:var(--acc)}
+.price-card .btn .arr{background:var(--acc);color:var(--acc-ink)}
+.price-card .p{font-family:Unbounded,system-ui,sans-serif;font-weight:900;font-size:clamp(56px,9vw,120px);letter-spacing:-.04em;line-height:.9}
+
+/* faq */
+.faq details{border-top:1px solid var(--line);padding:26px 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;font-family:Unbounded,system-ui,sans-serif;font-weight:600;font-size:clamp(17px,2vw,24px)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--acc);transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);margin-top:14px;max-width:760px}
+
+.faq-cta{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between;margin-top:40px;padding:28px;border:1px solid var(--line);border-radius:24px}
+.faq-cta p{margin:0}
+.btn.tg{gap:10px;text-transform:none;font-size:14px}
+.btn.ghost:hover{border-color:var(--acc);color:var(--acc)}
+/* footer */
+footer{padding:120px 0 40px;border-top:1px solid var(--line)}
+footer .giant{font-size:clamp(36px,10.5vw,200px);white-space:nowrap;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.2)}
+footer .legal{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;margin-top:40px;font-size:13px;color:var(--muted)}
+.disclaimer{font-size:13px;color:var(--muted);max-width:720px;margin-top:28px}
+
+/* sticky buy */
+.buybar{position:fixed;left:12px;right:12px;bottom:12px;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  background:rgba(18,18,18,.72);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border:1px solid var(--line);border-radius:999px;padding:8px 8px 8px 24px;max-width:620px;margin:0 auto;
+  transform:translateY(140%);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.buybar.show{transform:none}
+.buybar .t{font-size:13px;color:var(--muted);line-height:1.2}
+.buybar .t b{display:block;color:var(--text);font-family:Unbounded,system-ui,sans-serif;font-size:18px}
+.buybar .btn{--h:52px;padding:0 20px;font-size:13px}
+
+/* cursor */
+.cursor{position:fixed;left:0;top:0;width:12px;height:12px;border-radius:50%;background:var(--acc);pointer-events:none;z-index:100;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+.cursor.big{width:64px;height:64px}
+@media (hover:none){.cursor{display:none}}
+
+/* cookie */
+.cookie{position:fixed;left:12px;right:12px;bottom:84px;z-index:60;max-width:520px;margin:0 auto;background:#141414;border:1px solid var(--line);border-radius:20px;padding:18px;display:none}
+.cookie p{font-size:14px;color:#cfcfca;margin-bottom:12px}
+.cookie .r{display:flex;gap:8px;flex-wrap:wrap}
+.cookie button{font:600 14px Manrope,system-ui,sans-serif;border-radius:999px;padding:10px 16px;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer}
+.cookie button.ok{background:var(--acc);color:var(--acc-ink);border:0}
+
+@media (prefers-reduced-motion:reduce){
+  .marquee .track,body::after{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav class="nav"><div class="wrap">
+  <div class="logo">TRENDFLASH</div>
+  <a class="link js-buy" href="#">Отримати гайд →</a>
+</div></nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-fallback"></div>
+  <canvas id="gl"></canvas>
+  <div class="wrap">
+    <div class="eyebrow"><i></i>Гайд · промпти · скрипти</div>
+    <h1 class="display">
+      <span class="line"><span>Сайт з AI</span></span>
+      <span class="line"><span>за вечір.</span></span>
+      <span class="line"><span class="acc">Клієнт —</span></span>
+      <span class="line"><span class="acc">за тиждень.</span></span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-sub">Я зробив лендинг з AI і отримав за нього 500 €. Показую весь процес — від першого промпту до оплаченого замовлення.</p>
+      <a class="btn js-buy magnetic" href="#">Отримати за 249 грн <span class="arr">↗</span></a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll ↓</div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee"><div class="track">
+  <span>AI</span><span class="o">Лендинг</span><span class="a">500 €</span><span>Промпти</span><span class="o">Перший клієнт</span><span class="a">Без коду</span>
+  <span>AI</span><span class="o">Лендинг</span><span class="a">500 €</span><span>Промпти</span><span class="o">Перший клієнт</span><span class="a">Без коду</span>
+</div></div>
+
+<!-- MANIFESTO -->
+<section class="sec manifesto"><div class="wrap">
+  <div class="label">Чому це працює</div>
+  <p class="reveal-words">Сотні барбершопів, СТО і салонів досі живуть без нормального сайту. AI зробив створення сайту справою одного вечора. Більшість просто не знає, з чого почати — як писати промпти, де опублікувати і як вийти на власника.</p>
+  <div class="stats">
+    <div class="stat"><b data-count="500" data-suffix=" €">0 €</b><span>мій результат за один сайт</span></div>
+    <div class="stat"><b data-count="1" data-suffix=" вечір">0</b><span>на перший лендинг</span></div>
+    <div class="stat"><b data-count="15" data-suffix=" хв">0</b><span>щоб опублікувати сайт</span></div>
+  </div>
+</div></section>
+
+<!-- MODULES (horizontal) -->
+<section class="hwrap" id="modules">
+  <div class="wrap hhead">
+    <div class="label">Що всередині</div>
+    <h2 class="display big">6 кроків<br><span class="acc">до оплати</span></h2>
+  </div>
+  <div class="htrack">
+    <article class="mod"><div class="glow"></div><div class="n">01</div><div><h3>Кому продавати</h3><p>Ніші, яким найчастіше потрібен сайт, і як за 2 хвилини оцінити, чи варто писати бізнесу.</p></div></article>
+    <article class="mod"><div class="glow"></div><div class="n">02</div><div><h3>Промпти для AI</h3><p>Структура, тексти і код лендингу. Готові промпти — копіюєш і отримуєш результат.</p></div></article>
+    <article class="mod"><div class="glow"></div><div class="n">03</div><div><h3>Запуск за 15 хв</h3><p>Безкоштовний хостинг, домен, перевірка на телефоні.</p></div></article>
+    <article class="mod"><div class="glow"></div><div class="n">04</div><div><h3>Перший клієнт</h3><p>Мої реальні скрипти повідомлень і як вийти на власника, а не на адміністратора.</p></div></article>
+    <article class="mod"><div class="glow"></div><div class="n">05</div><div><h3>Скільки брати</h3><p>Як назвати ціну, що входить у роботу і як не працювати безкоштовно.</p></div></article>
+    <article class="mod accent"><div class="n">06</div><div><h3>Бонус</h3><p>10 готових промптів + шаблон рахунку для клієнта.</p></div></article>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="sec"><div class="wrap demo" id="demo">
+  <div>
+    <div class="label">Як це виглядає</div>
+    <h2 class="display big" style="margin-bottom:28px">Промпт<br><span class="acc">→ сайт</span></h2>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="body" id="typed"><span class="p">›</span> <span id="tt"></span><span class="caret"></span></div>
+    </div>
+  </div>
+  <div class="browser" id="browser">
+    <div class="bar"><i></i><i></i><i></i><div class="url">barber-kyiv.com.ua</div></div>
+    <div class="site">
+      <h4 class="piece">Барбершоп<br>на Подолі</h4>
+      <div class="sk piece" style="width:80%"></div>
+      <div class="sk piece" style="width:60%"></div>
+      <span class="cta piece">Записатися</span>
+      <div class="row"><div class="piece"></div><div class="piece"></div><div class="piece"></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CASE -->
+<section class="sec"><div class="wrap case">
+  <div>
+    <div class="label">Мій кейс</div>
+    <div class="money"><span data-count="500">0</span><span style="margin-left:.08em">€</span></div>
+  </div>
+  <div>
+    <ol class="steps">
+      <li><b>Запит</b><span>Знайомому потрібен був сайт для бізнесу.</span></li>
+      <li><b>Робота</b><span>Зробив лендинг з AI — без ручного коду.</span></li>
+      <li><b>Оплата</b><span>Клієнт прийняв роботу й оплатив 500 €.</span></li>
+    </ol>
+    <p class="muted" style="margin-top:24px">Весь цей процес — покроково в гайді.</p>
+  </div>
+</div></section>
+
+<!-- FIT -->
+<section class="sec"><div class="wrap">
+  <div class="label">Для кого</div>
+  <div class="fit">
+    <div class="c"><h3>Підійде</h3><ul>
+      <li>Хочеш навчитися робити сайти з AI</li>
+      <li>Готовий сам писати бізнесам</li>
+      <li>Маєш кілька вечорів на тиждень</li>
+    </ul></div>
+    <div class="c no"><h3>Не підійде</h3><ul>
+      <li>Шукаєш гроші без дій</li>
+      <li>Не готовий спілкуватися з клієнтами</li>
+      <li>Чекаєш гарантованого доходу</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<!-- PRICE -->
+<section class="sec" id="price"><div class="wrap">
+  <div class="price-card">
+    <div class="display">Весь процес.<br>Один платіж.</div>
+    <div class="row">
+      <ul>
+        <li>6 модулів покроково</li>
+        <li>Готові промпти для AI</li>
+        <li>Скрипти пошуку клієнтів</li>
+        <li>Доступ одразу після оплати</li>
+      </ul>
+      <div>
+        <div class="p">249 грн</div>
+        <a class="btn js-buy magnetic" href="#" style="margin-top:20px">Купити гайд <span class="arr">↗</span></a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="sec faq"><div class="wrap">
+  <div class="label">Питання</div>
+  <details><summary>Потрібно знати програмування?</summary><p>Ні. Весь код генерує AI за готовими промптами — ти копіюєш і публікуєш.</p></details>
+  <details><summary>Який AI потрібен?</summary><p>Достатньо безкоштовної версії популярних AI-асистентів. У гайді пояснюю, як з ними працювати.</p></details>
+  <details><summary>Скільки часу займе перший сайт?</summary><p>Перший — зазвичай один-два вечори. Далі швидше.</p></details>
+  <details><summary>Ви гарантуєте заробіток?</summary><p>Ні. Гайд дає процес і інструменти — далі все в твоїх руках.</p></details>
+  <details><summary>Як отримати доступ?</summary><p>Одразу після оплати відкривається сторінка з посиланням на гайд. Якщо щось не спрацювало — напиши в Telegram, надішлю вручну.</p></details>
+  <div class="faq-cta"><p class="muted">Залишились питання? Відповім особисто.</p><a class="btn ghost tg magnetic" href="https://t.me/trendflash_admin" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.8 15.3l-.4 5.3c.6 0 .8-.3 1.1-.6l2.7-2.6 5.6 4.1c1 .6 1.8.3 2-.9l3.7-17.2c.3-1.5-.6-2.1-1.6-1.7L1.3 9.9c-1.5.6-1.5 1.4-.3 1.8l5.6 1.7L19.6 5.3c.6-.4 1.2-.2.7.2"/></svg> Зв'язатися в Telegram</a></div>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="display giant">TRENDFLASH</div>
+  <div style="margin-top:28px"><a class="btn ghost tg magnetic" href="https://t.me/trendflash_admin" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.8 15.3l-.4 5.3c.6 0 .8-.3 1.1-.6l2.7-2.6 5.6 4.1c1 .6 1.8.3 2-.9l3.7-17.2c.3-1.5-.6-2.1-1.6-1.7L1.3 9.9c-1.5.6-1.5 1.4-.3 1.8l5.6 1.7L19.6 5.3c.6-.4 1.2-.2.7.2"/></svg> Зв'язатися в Telegram</a></div>
+  <p class="disclaimer">Навчальний матеріал · Не є гарантією доходу.</p>
+  <div class="legal">
+    <span>© 2026 Trendflash · Telegram <a href="https://t.me/trendflash_admin">@trendflash_admin</a></span>
+    <span><a href="oferta.html">Публічна оферта</a> · <a href="privacy.html">Конфіденційність</a> · <a href="#" id="cookie-settings">Cookie</a></span>
+  </div>
+</div></footer>
+
+<!-- STICKY BUY -->
+<div class="buybar" id="buybar">
+  <div class="t">Гайд «Сайт за вечір»<b>249 грн</b></div>
+  <a class="btn js-buy" href="#">Купити <span class="arr">↗</span></a>
+</div>
+
+<!-- COOKIE -->
+<div class="cookie" id="cookie">
+  <p>Ми використовуємо cookie для роботи сайту і, з твоєї згоди, для аналітики та реклами (Meta Pixel). <a href="privacy.html">Детальніше</a></p>
+  <div class="r"><button class="ok" id="cookie-ok">Прийняти</button><button id="cookie-no">Лише необхідні</button></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+/* ====== НАЛАШТУВАННЯ ====== */
+var PAY_URL  = "https://ВСТАВ_ПОСИЛАННЯ_НА_ОПЛАТУ";
+var PIXEL_ID = "";
+var PRICE    = 249;
+
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* buy links */
+document.querySelectorAll('.js-buy').forEach(function(a){
+  a.href = PAY_URL; a.target = "_blank"; a.rel = "noopener";
+  a.addEventListener('click', function(){ if (window.fbq) fbq('track','InitiateCheckout',{value:PRICE,currency:'UAH'}); });
+});
+
+/* ====== WebGL shader hero ====== */
+(function(){
+  var c = document.getElementById('gl'); var gl = c.getContext('webgl');
+  if (!gl) { c.style.display='none'; return; }
+  var vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+  var fs = [
+  'precision highp float;uniform vec2 r;uniform float t;uniform vec2 m;',
+  'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+  'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}',
+  'float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<6;i++){v+=a*n(p);p*=2.02;a*=.5;}return v;}',
+  'void main(){vec2 uv=gl_FragCoord.xy/r;vec2 p=(gl_FragCoord.xy-.5*r)/r.y;',
+  'vec2 mm=(m-.5)*vec2(r.x/r.y,1.);float d=length(p-mm);',
+  'vec2 q=vec2(fbm(p*1.6+t*.05),fbm(p*1.6+vec2(5.2,1.3)-t*.04));',
+  'vec2 w=vec2(fbm(p*1.4+2.*q+vec2(1.7,9.2)+t*.08-.3*d),fbm(p*1.4+2.*q+vec2(8.3,2.8)-t*.06));',
+  'float f=fbm(p*1.2+2.4*w);',
+  'vec3 col=mix(vec3(.02),vec3(.09,.10,.07),clamp(f*f*2.,0.,1.));',
+  'col=mix(col,vec3(.78,1.,.24),smoothstep(.62,.95,f)*.55);',
+  'col+=vec3(.78,1.,.24)*.18*smoothstep(.5,.0,d)*f;',
+  'col*=smoothstep(1.25,.25,length(uv-vec2(.6,.55)));',
+  'col=mix(col,vec3(.043),smoothstep(.55,.0,uv.y)*.85);',
+  'gl_FragColor=vec4(col,1.);}'].join('');
+  function sh(type,src){var s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+  var pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
+  var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  var loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  var ur=gl.getUniformLocation(pr,'r'),ut=gl.getUniformLocation(pr,'t'),um=gl.getUniformLocation(pr,'m');
+  var mouse=[.65,.55],target=[.65,.55];
+  window.addEventListener('pointermove',function(e){target=[e.clientX/innerWidth,1.-e.clientY/innerHeight];});
+  function size(){var dpr=Math.min(devicePixelRatio,1.5);c.width=c.clientWidth*dpr;c.height=c.clientHeight*dpr;gl.viewport(0,0,c.width,c.height);}
+  size();addEventListener('resize',size);
+  var start=performance.now(), visible=true;
+  new IntersectionObserver(function(e){visible=e[0].isIntersecting;}).observe(c);
+  (function loop(){requestAnimationFrame(loop);if(!visible)return;
+    mouse[0]+=(target[0]-mouse[0])*.04;mouse[1]+=(target[1]-mouse[1])*.04;
+    gl.uniform2f(ur,c.width,c.height);gl.uniform1f(ut,reduce?0:(performance.now()-start)/1000);gl.uniform2f(um,mouse[0],mouse[1]);
+    gl.drawArrays(gl.TRIANGLE_STRIP,0,4);})();
+})();
+
+/* ====== cursor + magnetic ====== */
+(function(){
+  var cur=document.getElementById('cursor'), x=0,y=0,cx=0,cy=0;
+  addEventListener('pointermove',function(e){x=e.clientX;y=e.clientY;});
+  (function l(){cx+=(x-cx)*.2;cy+=(y-cy)*.2;cur.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)';requestAnimationFrame(l);})();
+  document.querySelectorAll('a,button,summary').forEach(function(el){
+    el.addEventListener('mouseenter',function(){cur.classList.add('big');});
+    el.addEventListener('mouseleave',function(){cur.classList.remove('big');});
+  });
+  if (reduce || !window.gsap) return;
+  document.querySelectorAll('.magnetic').forEach(function(el){
+    el.addEventListener('mousemove',function(e){var r=el.getBoundingClientRect();
+      gsap.to(el,{x:(e.clientX-r.left-r.width/2)*.25,y:(e.clientY-r.top-r.height/2)*.35,duration:.4,ease:'power3.out'});});
+    el.addEventListener('mouseleave',function(){gsap.to(el,{x:0,y:0,duration:.7,ease:'elastic.out(1,.4)'});});
+  });
+})();
+
+/* ====== sticky bar ====== */
+var bar=document.getElementById('buybar');
+function checkBar(){ bar.classList.toggle('show', scrollY > innerHeight*0.7); }
+addEventListener('scroll',checkBar,{passive:true}); checkBar();
+
+/* ====== GSAP ====== */
+if (window.gsap && !reduce) {
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (window.Lenis) {
+    var lenis = new Lenis({lerp:.09, smoothWheel:true});
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function(t){ lenis.raf(t*1000); }); gsap.ticker.lagSmoothing(0);
+  }
+
+  /* hero intro */
+  gsap.from('.hero h1 .line span',{yPercent:110,duration:1.3,ease:'expo.out',stagger:.09,delay:.15});
+  gsap.from('.eyebrow,.hero-sub,.hero .btn,.scroll-hint',{y:24,opacity:0,duration:1,ease:'power3.out',stagger:.08,delay:.7});
+  gsap.to('.hero .wrap',{yPercent:-18,opacity:.2,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+
+  /* word reveal */
+  document.querySelectorAll('.reveal-words').forEach(function(el){
+    el.innerHTML = el.textContent.split(' ').map(function(w){return '<span class="w">'+w+'</span>';}).join(' ');
+    gsap.to(el.querySelectorAll('.w'),{opacity:1,stagger:.05,ease:'none',scrollTrigger:{trigger:el,start:'top 80%',end:'bottom 45%',scrub:true}});
+  });
+
+  /* counters */
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var to=+el.dataset.count, suf=el.dataset.suffix||'', o={v:0};
+    ScrollTrigger.create({trigger:el,start:'top 85%',once:true,onEnter:function(){
+      gsap.to(o,{v:to,duration:1.8,ease:'power3.out',onUpdate:function(){el.textContent=Math.round(o.v)+suf;}});
+    }});
+  });
+
+  /* horizontal modules */
+  var track=document.querySelector('.htrack');
+  var mm = gsap.matchMedia();
+  mm.add('(min-width: 760px)', function(){
+    gsap.to(track,{x:function(){return -(track.scrollWidth-innerWidth+40);},ease:'none',
+      scrollTrigger:{trigger:'#modules',start:'top top',end:function(){return '+='+(track.scrollWidth-innerWidth);},scrub:1,pin:true,invalidateOnRefresh:true}});
+  });
+  mm.add('(max-width: 759px)', function(){
+    track.style.flexDirection='column'; track.style.width='100%'; track.style.padding='24px 20px 56px';
+    gsap.utils.toArray('.mod').forEach(function(m){gsap.from(m,{y:60,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:m,start:'top 88%'}});});
+  });
+
+  /* section headings */
+  gsap.utils.toArray('.big,.label,.price-card,.fit .c,.faq details,.steps li').forEach(function(el){
+    gsap.from(el,{y:50,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+
+  /* demo: type prompt → build site */
+  var prompt='Зроби лендинг для барбершопу на Подолі: темний стиль, кнопка запису, 3 фото робіт';
+  var tt=document.getElementById('tt');
+  ScrollTrigger.create({trigger:'#demo',start:'top 65%',once:true,onEnter:function(){
+    var i=0;(function type(){ tt.textContent=prompt.slice(0,++i); if(i<prompt.length) setTimeout(type,28); else build(); })();
+  }});
+  function build(){
+    gsap.fromTo('#browser',{rotateX:8,scale:.96},{rotateX:0,scale:1,duration:1.2,ease:'expo.out'});
+    gsap.to('.site .piece',{opacity:1,y:0,duration:.7,stagger:.12,ease:'power3.out'});
+  }
+
+  /* footer giant */
+  gsap.from('footer .giant',{yPercent:40,opacity:0,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'top 40%',scrub:true}});
+} else {
+  document.querySelectorAll('.reveal-words .w,.site .piece').forEach(function(e){e.style.opacity=1;e.style.transform='none';});
+  document.getElementById('tt').textContent='Зроби лендинг для барбершопу на Подолі: темний стиль, кнопка запису, 3 фото робіт';
+  document.querySelectorAll('[data-count]').forEach(function(el){el.textContent=el.dataset.count+(el.dataset.suffix||'');});
+}
+
+/* ====== cookie + pixel ====== */
+function loadPixel(){
+  if(!PIXEL_ID||window.fbq)return;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+  s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init',PIXEL_ID);fbq('track','PageView');
+}
+var box=document.getElementById('cookie');
+function getC(){try{return localStorage.getItem('cookie_choice');}catch(e){return null;}}
+function setC(v){try{localStorage.setItem('cookie_choice',v);}catch(e){}}
+var ch=getC(); if(ch==='all') loadPixel(); else if(!ch) setTimeout(function(){box.style.display='block';},1800);
+document.getElementById('cookie-ok').onclick=function(){setC('all');box.style.display='none';loadPixel();};
+document.getElementById('cookie-no').onclick=function(){setC('necessary');box.style.display='none';};
+document.getElementById('cookie-settings').onclick=function(e){e.preventDefault();box.style.display='block';};
+</script>
+</body>
+</html>
