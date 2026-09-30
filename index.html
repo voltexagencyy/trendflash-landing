@@ -217,7 +217,7 @@ footer .legal{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between
 
 <nav class="nav"><div class="wrap">
   <div class="logo">TRENDFLASH</div>
-  <a class="link js-buy" href="#">Написати →</a>
+  <a class="link js-buy" href="#">Купити →</a>
 </div></nav>
 
 <!-- HERO -->
@@ -234,7 +234,7 @@ footer .legal{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between
     </h1>
     <div class="hero-bottom">
       <p class="hero-sub">Я зробив лендинг з AI і отримав за нього 500 €. Показую весь процес — від першого промпту до оплаченого замовлення.</p>
-      <a class="btn js-buy magnetic" href="#">Хочу гайд <span class="arr">↗</span></a>
+      <a class="btn js-buy magnetic" href="#">Купити за 249 грн <span class="arr">↗</span></a>
     </div>
   </div>
   <div class="scroll-hint">Scroll ↓</div>
@@ -337,11 +337,11 @@ footer .legal{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between
         <li>6 модулів покроково</li>
         <li>Готові промпти для AI</li>
         <li>Скрипти пошуку клієнтів</li>
-        <li>Відповідь у Telegram</li>
+        <li>Доступ одразу після оплати</li>
       </ul>
       <div>
         <div class="p">249 грн</div>
-        <a class="btn js-buy magnetic" href="#" style="margin-top:20px">Хочу гайд <span class="arr">↗</span></a>
+        <a class="btn js-buy magnetic" href="#" style="margin-top:20px">Купити гайд <span class="arr">↗</span></a>
       </div>
     </div>
   </div>
@@ -354,7 +354,7 @@ footer .legal{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between
   <details><summary>Який AI потрібен?</summary><p>Достатньо безкоштовної версії популярних AI-асистентів. У гайді пояснюю, як з ними працювати.</p></details>
   <details><summary>Скільки часу займе перший сайт?</summary><p>Перший — зазвичай один-два вечори. Далі швидше.</p></details>
   <details><summary>Ви гарантуєте заробіток?</summary><p>Ні. Гайд дає процес і інструменти — далі все в твоїх руках.</p></details>
-  <details><summary>Як отримати гайд?</summary><p>Натисни «Хочу гайд» і напиши в Telegram — відповім і розкажу, як отримати доступ.</p></details>
+  <details><summary>Як отримати гайд?</summary><p>Одразу після оплати відкриється вікно з кнопкою «Завантажити гайд», а копія посилання прийде тобі на пошту. Оплата — карткою, Apple Pay або Google Pay.</p></details>
   <div class="faq-cta"><p class="muted">Залишились питання? Відповім особисто.</p><a class="btn ghost tg magnetic" href="https://t.me/trendflash_info" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.8 15.3l-.4 5.3c.6 0 .8-.3 1.1-.6l2.7-2.6 5.6 4.1c1 .6 1.8.3 2-.9l3.7-17.2c.3-1.5-.6-2.1-1.6-1.7L1.3 9.9c-1.5.6-1.5 1.4-.3 1.8l5.6 1.7L19.6 5.3c.6-.4 1.2-.2.7.2"/></svg> Зв'язатися в Telegram</a></div>
 </div></section>
 
@@ -372,7 +372,7 @@ footer .legal{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between
 <!-- STICKY BUY -->
 <div class="buybar" id="buybar">
   <div class="t">Гайд «Сайт за вечір»<b>249 грн</b></div>
-  <a class="btn js-buy" href="#">Хочу гайд <span class="arr">↗</span></a>
+  <a class="btn js-buy" href="#">Купити <span class="arr">↗</span></a>
 </div>
 
 <!-- COOKIE -->
@@ -381,12 +381,13 @@ footer .legal{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between
   <div class="r"><button class="ok" id="cookie-ok">Прийняти</button><button id="cookie-no">Лише необхідні</button></div>
 </div>
 
+<script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 /* ====== НАЛАШТУВАННЯ ====== */
-var PAY_URL  = "https://t.me/trendflash_info";
+var PAY_URL  = "https://trendflash.lemonsqueezy.com/checkout/buy/0c5300c4-0588-4950-9176-988e79642c22?embed=1&media=0";
 var PIXEL_ID = "";
 var PRICE    = 249;
 
@@ -394,8 +395,8 @@ var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* buy links */
 document.querySelectorAll('.js-buy').forEach(function(a){
-  a.href = PAY_URL; a.target = "_blank"; a.rel = "noopener";
-  a.addEventListener('click', function(){ if (window.fbq) fbq('track','Contact'); });
+  a.href = PAY_URL; a.classList.add('lemonsqueezy-button');
+  a.addEventListener('click', function(){ if (window.fbq) fbq('track','InitiateCheckout',{value:PRICE,currency:'UAH'}); });
 });
 
 /* ====== WebGL shader hero ====== */
