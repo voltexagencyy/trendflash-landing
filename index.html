@@ -381,13 +381,12 @@ footer .legal{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between
   <div class="r"><button class="ok" id="cookie-ok">Прийняти</button><button id="cookie-no">Лише необхідні</button></div>
 </div>
 
-<script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 /* ====== НАЛАШТУВАННЯ ====== */
-var PAY_URL  = "https://trendflash.lemonsqueezy.com/checkout/buy/0c5300c4-0588-4950-9176-988e79642c22?embed=1&media=0";
+var PAY_URL  = "https://trendflash.lemonsqueezy.com/checkout/buy/0c5300c4-0588-4950-9176-988e79642c22";
 var PIXEL_ID = "";
 var PRICE    = 249;
 
@@ -395,7 +394,7 @@ var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* buy links */
 document.querySelectorAll('.js-buy').forEach(function(a){
-  a.href = PAY_URL; a.classList.add('lemonsqueezy-button');
+  a.href = PAY_URL;
   a.addEventListener('click', function(){ if (window.fbq) fbq('track','InitiateCheckout',{value:PRICE,currency:'UAH'}); });
 });
 
