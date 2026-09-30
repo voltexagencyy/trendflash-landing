@@ -234,7 +234,7 @@ footer .legal{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between
     </h1>
     <div class="hero-bottom">
       <p class="hero-sub">Я зробив лендинг з AI і отримав за нього 500 €. Показую весь процес — від першого промпту до оплаченого замовлення.</p>
-      <a class="btn js-buy magnetic" href="#">Купити за 249 грн <span class="arr">↗</span></a>
+      <a class="btn js-buy magnetic" href="#">Купити за $5.99 <span class="arr">↗</span></a>
     </div>
   </div>
   <div class="scroll-hint">Scroll ↓</div>
@@ -340,7 +340,8 @@ footer .legal{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between
         <li>Доступ одразу після оплати</li>
       </ul>
       <div>
-        <div class="p">249 грн</div>
+        <div class="p">$5.99</div>
+        <div class="muted" style="margin-top:6px;font-size:14px">≈ 250 грн · банк сконвертує автоматично</div>
         <a class="btn js-buy magnetic" href="#" style="margin-top:20px">Купити гайд <span class="arr">↗</span></a>
       </div>
     </div>
@@ -372,7 +373,7 @@ footer .legal{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between
 
 <!-- STICKY BUY -->
 <div class="buybar" id="buybar">
-  <div class="t">Гайд «Сайт за вечір»<b>249 грн</b></div>
+  <div class="t">Гайд «Сайт за вечір»<b>$5.99</b></div>
   <a class="btn js-buy" href="#">Купити <span class="arr">↗</span></a>
 </div>
 
@@ -387,16 +388,16 @@ footer .legal{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 /* ====== НАЛАШТУВАННЯ ====== */
-var PAY_URL  = "https://trendflash.lemonsqueezy.com/checkout/buy/0c5300c4-0588-4950-9176-988e79642c22";
+var PAY_URL  = "https://www.creem.io/payment/prod_1VZlEoSVbSA5JM0ak9gmHZ";
 var PIXEL_ID = "";
-var PRICE    = 249;
+var PRICE    = 5.99;
 
 var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* buy links */
 document.querySelectorAll('.js-buy').forEach(function(a){
   a.href = PAY_URL;
-  a.addEventListener('click', function(){ if (window.fbq) fbq('track','InitiateCheckout',{value:PRICE,currency:'UAH'}); });
+  a.addEventListener('click', function(){ if (window.fbq) fbq('track','InitiateCheckout',{value:PRICE,currency:'USD'}); });
 });
 
 /* ====== WebGL shader hero ====== */
